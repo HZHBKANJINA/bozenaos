@@ -7,14 +7,13 @@
 
 #define N 5   // broj mjesta
 
-/* inicijalizacija semafora*/
 sem_t slobodna_mjesta;
 sem_t puna;
 sem_t mutex;
 
 int ukrcani = 0;
 
-void* posjetitelj(void* arg) //funkcija brojanja posjetitelja
+void* posjetitelj(void* arg)
 {
     int id = *(int*)arg;
 
@@ -39,7 +38,7 @@ void* posjetitelj(void* arg) //funkcija brojanja posjetitelja
     return NULL;
 }
 
-void* vrtuljak(void* arg) //funkcija pokretanja vrtuljka uz provjere
+void* vrtuljak(void* arg)
 {
     while (1)
     {
@@ -65,14 +64,14 @@ void* vrtuljak(void* arg) //funkcija pokretanja vrtuljka uz provjere
     return NULL;
 }
 
-int main() // glavni program
+int main()
 {
-    pthread_t t_vrtuljak, t_posjetitelji[10];
+    pthread_t t_vrtuljak, t_posjetitelji[10]; //dretva(procjes dijete)
     int id[10];
 
     srand(time(NULL));
 
-    sem_init(&slobodna_mjesta, 0, N);
+    sem_init(&slobodna_mjesta, 0, N); //inicijalizacija semafora
     sem_init(&puna, 0, 0);
     sem_init(&mutex, 0, 1);
 
